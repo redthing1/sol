@@ -6,4 +6,3 @@ license "proprietary"
 targetType "executable"
 
 cSourcePaths "../../src/sol"
-cImportPaths "../../src/sol"

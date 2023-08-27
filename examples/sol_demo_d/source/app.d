@@ -29,8 +29,7 @@ int main(string[] args) {
     char* key_st = argv[2];
     // sha256 hash the key
     ubyte[sol_crypto_hash_BYTES] key;
-    // sol_crypto_hash(cast(ubyte*) key, cast(ubyte*) key_st, strlen(key_st));
-    sol_crypto_hashblocks_sha512_tweet(cast(ubyte*) key, cast(ubyte*) key_st, strlen(key_st));
+    sol_crypto_hash(cast(ubyte*) key, cast(ubyte*) key_st, strlen(key_st));
 
     // generate a random nonce
     ubyte[sol_crypto_secretbox_NONCEBYTES] nonce;
@@ -45,8 +44,7 @@ int main(string[] args) {
     // create a buffer for the ciphertext
     ubyte[sol_crypto_secretbox_ZEROBYTES + INPUT_MAX] ciphertext;
     // encrypt the plaintext
-    // sol_crypto_secretbox(ciphertext, plaintext, sol_crypto_secretbox_ZEROBYTES + INPUT_MAX, nonce, key);
-    sol_crypto_secretbox_xsalsa20poly1305_tweet(cast(ubyte*) ciphertext, cast(ubyte*) plaintext, sol_crypto_secretbox_ZEROBYTES + INPUT_MAX, cast(
+    sol_crypto_secretbox(cast(ubyte*) ciphertext, cast(ubyte*) plaintext, sol_crypto_secretbox_ZEROBYTES + INPUT_MAX, cast(
             ubyte*) nonce, cast(ubyte*) key);
 
     // print the parameters
@@ -78,8 +76,7 @@ int main(string[] args) {
 
     // now try to decrypt the ciphertext
     ubyte[sol_crypto_secretbox_ZEROBYTES + INPUT_MAX] decrypted;
-    // int secretbox_open_ret = sol_crypto_secretbox_open(decrypted, ciphertext, sol_crypto_secretbox_ZEROBYTES + INPUT_MAX, nonce, key);
-    int secretbox_open_ret = sol_crypto_secretbox_xsalsa20poly1305_tweet_open(
+    int secretbox_open_ret = sol_crypto_secretbox_open(
         cast(ubyte*) decrypted, cast(ubyte*) ciphertext, sol_crypto_secretbox_ZEROBYTES + INPUT_MAX, cast(
             ubyte*) nonce, cast(ubyte*) key);
     if (secretbox_open_ret != 0) {
