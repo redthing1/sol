@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <sol.h>
+#include "sol.h"
 
 int main(int argc, char** argv) {
   if (argc != 3) {

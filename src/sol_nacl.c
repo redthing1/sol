@@ -1,4 +1,4 @@
-#include <sol.h>
+#include "sol.h"
 
 // https://tweetnacl.cr.yp.to/20140427/tweetnacl.c
 
