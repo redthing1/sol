@@ -6,7 +6,7 @@ import std.algorithm : map;
 import std.conv : to;
 import std.array : array;
 
-import libsol;
+import sol;
 
 int main(string[] args) {
     int argc = cast(int) args.length;

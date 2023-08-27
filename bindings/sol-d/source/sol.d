@@ -1,4 +1,4 @@
-module libsol;
+module sol;
 
 public {
     import sol_nacl;

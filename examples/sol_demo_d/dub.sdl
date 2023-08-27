@@ -5,4 +5,6 @@ copyright "Copyright © 2023, no"
 license "proprietary"
 targetType "executable"
 
+dependency "sol-d" path="../../bindings/sol-d"
+
 cSourcePaths "../../src/sol"
