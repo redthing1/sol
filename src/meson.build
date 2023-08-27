@@ -13,9 +13,9 @@ sol_lib = shared_library('sol',
   gnu_symbol_visibility : 'default',
 )
 
-sol_test_exe = executable('sol_test', 'sol_test.c',
+sol_demo_exe = executable('sol_demo', 'sol_demo.c',
   link_with : sol_lib)
-test('sol', sol_test_exe)
+test('sol', sol_demo_exe)
 
 # Make this library usable as a Meson subproject.
 sol_dep = declare_dependency(

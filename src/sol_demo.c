@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
   char* key_st = argv[2];
   // sha256 hash the key
   unsigned char key[sol_crypto_hash_BYTES];
-  sol_crypto_hash(key, key_st, strlen(key_st));
+  sol_crypto_hash(key, (unsigned char*)key_st, strlen(key_st));
 
   // generate a random nonce
   unsigned char nonce[sol_crypto_secretbox_NONCEBYTES];
@@ -35,25 +35,25 @@ int main(int argc, char** argv) {
 
   // print the parameters
   printf("key: ");
-  for (int i = 0; i < sol_crypto_hash_sha256_BYTES; i++) {
+  for (size_t i = 0; i < sol_crypto_hash_sha256_BYTES; i++) {
     printf("%02x", key[i]);
   }
   printf("\n");
   printf("nonce: ");
-  for (int i = 0; i < sol_crypto_secretbox_NONCEBYTES; i++) {
+  for (size_t i = 0; i < sol_crypto_secretbox_NONCEBYTES; i++) {
     printf("%02x", nonce[i]);
   }
   printf("\n");
 
   // print the original plaintext
   printf("plaintext: ");
-  for (int i = sol_crypto_secretbox_ZEROBYTES; i < sol_crypto_secretbox_ZEROBYTES + strlen(input); i++) {
+  for (size_t i = sol_crypto_secretbox_ZEROBYTES; i < sol_crypto_secretbox_ZEROBYTES + strlen(input); i++) {
     printf("%02x", plaintext[i]);
   }
   printf("\n");
 
   printf("ciphertext: ");
-  for (int i = sol_crypto_secretbox_ZEROBYTES; i < sol_crypto_secretbox_ZEROBYTES + strlen(input); i++) {
+  for (size_t i = sol_crypto_secretbox_ZEROBYTES; i < sol_crypto_secretbox_ZEROBYTES + strlen(input); i++) {
     printf("%02x", ciphertext[i]);
   }
   printf("\n");
@@ -62,24 +62,24 @@ int main(int argc, char** argv) {
   unsigned char decrypted[sol_crypto_secretbox_ZEROBYTES + strlen(input)];
   if (sol_crypto_secretbox_open(decrypted, ciphertext, sol_crypto_secretbox_ZEROBYTES + strlen(input), nonce, key) !=
       0) {
-    printf("Decryption failed!\n");
+    printf("decryption failed!\n");
     return 1;
   }
 
   // print the decrypted plaintext
   printf("plaintext: ");
-  for (int i = sol_crypto_secretbox_ZEROBYTES; i < sol_crypto_secretbox_ZEROBYTES + strlen(input); i++) {
+  for (size_t i = sol_crypto_secretbox_ZEROBYTES; i < sol_crypto_secretbox_ZEROBYTES + strlen(input); i++) {
     printf("%02x", decrypted[i]);
   }
   printf("\n");
 
   // verify that the decrypted plaintext matches the original plaintext
   if (memcmp(plaintext, decrypted, sol_crypto_secretbox_ZEROBYTES + strlen(input)) != 0) {
-    printf("Decrypted plaintext does not match original plaintext!\n");
+    printf("decrypted plaintext does not match original plaintext!\n");
     return 1;
   }
 
-  printf("Decryption succeeded!\n");
+  printf("decryption succeeded!\n");
 
   return 0;
 }
