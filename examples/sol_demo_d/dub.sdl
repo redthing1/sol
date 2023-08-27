@@ -1,0 +1,9 @@
+name "sol_demo_d"
+description "A minimal D application."
+authors "no"
+copyright "Copyright © 2023, no"
+license "proprietary"
+targetType "executable"
+
+cSourcePaths "../../src/sol"
+cImportPaths "../../src/sol"
