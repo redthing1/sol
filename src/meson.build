@@ -1,6 +1,10 @@
 project('sol', 'c',
   version : '0.1',
-  default_options : ['warning_level=3'])
+  default_options : [
+    'warning_level=3',
+    'optimization=2',
+  ]
+)
 
 # These arguments are only used to build the shared library
 # not the executables that use the library.
