@@ -1,3 +1,5 @@
+// based on https://github.com/dsprenkels/randombytes
+
 // In the case that are compiling on linux, we need to define _GNU_SOURCE
 // *before* randombytes.h is included. Otherwise SYS_getrandom will not be
 // declared.
